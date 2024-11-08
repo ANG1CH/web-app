@@ -1,0 +1,24 @@
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+      <a href="{{ url_for('post.all') }}" class="d-inline-flex link-body-emphasis text-decoration-none">
+       <img class="header__img" src="{{ url_for('static', filename='img/logo.png') }}" alt="logo">
+      </a>
+    </div>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="{{ url_for('post.all') }}" class="nav-link px-2 link-secondary">Главная</a></li>
+      {% if current_user.is_authenticated and current_user.status == 'teacher' %}
+        <li><a href="{{ url_for('post.create') }}" class="nav-link px-2">Добавить тему</a></li>
+      {% endif %}
+    </ul>
+
+    <div class="col-md-3 text-end">
+      {% if current_user.is_authenticated %}
+        <span>Добро пожаловать {{ current_user.name }}</span>
+        <a href="{{ url_for('user.logout') }}" type="button" class="btn btn-outline-primary me-2">Выйти</a>
+      {% else %}
+        <a href="{{ url_for('user.login') }}" type="button" class="btn btn-outline-primary me-2">Войти</a>
+        <a href="{{ url_for('user.register') }}" type="button" class="btn btn-primary">Регистрация</a>
+      {% endif %}
+    </div>
+</header>
